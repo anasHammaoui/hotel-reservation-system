@@ -2,19 +2,6 @@
 
 A Java console application for managing hotel reservations, including hotel management, room booking, cancellation, and reservation history tracking.
 
-## 📋 Table of Contents
-
-- [Project Overview](#project-overview)
-- [Learning Objectives](#learning-objectives)
-- [Features](#features)
-- [User Roles](#user-roles)
-- [Business Rules](#business-rules)
-- [Domain Model](#domain-model)
-- [Architecture](#architecture)
-- [User Journey](#user-journey)
-- [Expected Results](#expected-results)
-- [Getting Started](#getting-started)
-
 ## 🎯 Project Overview
 
 ### Target Audience
@@ -177,7 +164,7 @@ Develop a clean, testable, and understandable foundation for a hotel reservation
 ### Installation
 1. Clone the repository
 ```bash
-git clone [your-repo-url]
+git clone https://github.com/anasHammaoui/hotel-reservation-system.git
 cd hotel-reservation-system
 ```
 
@@ -198,11 +185,3 @@ java -cp bin Main
 4. Follow the guided prompts for each operation
 
 ---
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
