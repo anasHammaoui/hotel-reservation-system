@@ -1,15 +1,36 @@
 package src.repositories;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 import src.interfaces.AuthInterface;
+import src.models.User;
+import src.services.AuthService;
 
 public class AuthRepository implements AuthInterface {
-    public int register(){
-        return 2;
+    private ArrayList<User> users = new ArrayList<>();
+    private UUID id;
+    private AuthService authService = new AuthService();
+    private boolean isLogedIn = false;
+    public boolean register(String fullName, String email, String password){
+        if (authService.register(users, fullName, email, password)){
+            for (User user: users){
+                if (user.getEmail().equals(email)){
+                    this.id = user.getId();
+                    this.isLogedIn = true;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
-    public int login(){
-        return 4;
+    public String login(){
+        return "anas@gmail.com";
     }
     public boolean isLogedIn(){
-        return false;
+        return this.isLogedIn;
+    }
+    public UUID getId(){
+        return this.id;
     }
 }
