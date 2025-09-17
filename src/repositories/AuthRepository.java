@@ -19,13 +19,21 @@ public class AuthRepository implements AuthInterface {
                 if (user.getEmail().equals(email)){
                     this.id = user.getId();
                     this.isLogedIn = true;
+                    break;
                 }
             }
         }
         return message;
     }
-    public String login(){
-        return "anas@gmail.com";
+    public String login(String email, String password){
+        try {
+            User user = authService.login(users, email, password);
+            this.id = user.getId();
+            this.isLogedIn = true;
+            return "done";
+        } catch (IllegalArgumentException e){
+            return e.getMessage();
+        }
     }
     public boolean isLogedIn(){
         return this.isLogedIn;

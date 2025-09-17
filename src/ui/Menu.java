@@ -20,11 +20,24 @@ public class Menu {
         System.out.print("Enter your password: ");
         String password = input.nextLine();
         String message = auth.register(fullName,email,password);
-        if ( message == "done"){
-            System.out.print(auth.isLogedIn());
-            System.out.print(auth.getId());
+        if (message == "done"){
+            System.out.println(auth.isLogedIn());
+            System.out.println(auth.getId());
         } else {
-            System.err.print(message);
+            System.err.println(message);
+        }
+    }
+    public void loginMenu(Scanner input, AuthRepository auth){
+        System.out.print("Enter your Email:");
+        String email = input.nextLine();
+        System.out.print("Enter your password: ");
+        String password = input.nextLine();
+        String message = auth.login(email,password);
+        if (message == "done"){
+            System.out.println(auth.isLogedIn());
+            System.out.println(auth.getId());
+        } else  {
+           System.err.println(message);
         }
     }
 }
