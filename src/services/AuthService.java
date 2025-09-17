@@ -7,7 +7,7 @@ import src.models.User;
 public class AuthService {
     public boolean register(ArrayList<User> users, String fullName, String email, String password){
         for (User user: users){
-            if (user.getEmail().equals(email)){
+            if (user.getEmail().equalsIgnoreCase(email)){
                 return false;
             }     
         }

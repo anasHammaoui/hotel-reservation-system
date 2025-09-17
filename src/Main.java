@@ -6,17 +6,24 @@ import src.repositories.AuthRepository;
 
 public class Main {
     public static void main(String[] args) {
-        AuthRepository auth = new AuthRepository();
+ 
         Scanner input = new Scanner(System.in);
+        AuthRepository auth = new AuthRepository();
+        while(true){
         System.out.println("enter your name: ");
         String fullName = input.nextLine();
         System.out.println("enter your email: ");
         String email = input.nextLine();
         System.out.println("enter your password: ");
         String password = input.nextLine();
-        auth.register(fullName,email,password);
-        System.out.println(auth.isLogedIn());
-        System.out.println(auth.getId());
+        if (auth.register(fullName,email,password)){
+            System.out.println(auth.isLogedIn());
+            System.out.println(auth.getId());
+        } else {
+            System.out.println("failed to register");
+            break;
+        }
+        }
         input.close();
     }
 }
