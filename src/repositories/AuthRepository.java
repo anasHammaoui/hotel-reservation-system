@@ -12,17 +12,17 @@ public class AuthRepository implements AuthInterface {
     private UUID id;
     private AuthService authService = new AuthService();
     private boolean isLogedIn = false;
-    public boolean register(String fullName, String email, String password){
-        if (authService.register(users, fullName, email, password)){
+    public String register(String fullName, String email, String password){
+        String message = authService.register(users, fullName, email, password);
+        if ( message == "done"){
             for (User user: users){
                 if (user.getEmail().equals(email)){
                     this.id = user.getId();
                     this.isLogedIn = true;
-                    return true;
                 }
             }
         }
-        return false;
+        return message;
     }
     public String login(){
         return "anas@gmail.com";
