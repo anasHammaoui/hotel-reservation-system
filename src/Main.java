@@ -13,15 +13,15 @@ public class Main {
         Menu menu = new Menu();
         int choice;
         while(true){
+            System.out.println("*****Main Menu******");
             System.out.println(menu.guestMenu());
             choice = input.nextInt();
             input.nextLine();
             switch(choice){
                 case 1 -> menu.registerMenu(input, auth);
                 case 2 -> menu.loginMenu(input, auth);
-                case 0 -> {
-                    System.exit(0);
-                }
+                case 0 -> System.exit(0);
+                default ->  System.out.println("Invalid choice. Please try again.");
             }
 
         }

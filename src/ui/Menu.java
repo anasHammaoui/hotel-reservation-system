@@ -13,6 +13,7 @@ public class Menu {
         return menu;
     }
     public void registerMenu(Scanner input, AuthRepository auth){
+        System.out.println("*****Register Menu******");
         System.out.print("Enter your name: ");
         String fullName = input.nextLine();
         System.out.print("Enter your email: ");
@@ -20,24 +21,52 @@ public class Menu {
         System.out.print("Enter your password: ");
         String password = input.nextLine();
         String message = auth.register(fullName,email,password);
-        if (message == "done"){
-            System.out.println(auth.isLogedIn());
-            System.out.println(auth.getId());
+        if (message.equals("done")){
+            this.authenticatedMenu(input, auth);
         } else {
             System.err.println(message);
         }
     }
     public void loginMenu(Scanner input, AuthRepository auth){
+        System.out.println("*****Login Menu******");
         System.out.print("Enter your Email:");
         String email = input.nextLine();
         System.out.print("Enter your password: ");
         String password = input.nextLine();
         String message = auth.login(email,password);
-        if (message == "done"){
-            System.out.println(auth.isLogedIn());
-            System.out.println(auth.getId());
+        if (message.equals("done")){
+            this.authenticatedMenu(input, auth);
         } else  {
            System.err.println(message);
         }
+    }
+
+    public void authenticatedMenu(Scanner input, AuthRepository auth){
+        System.out.println("*****Welcome "+ auth.getAuthUser(auth.isLogedIn(), auth.getId()).getFullName() +"******");
+        String menu = """
+                1)Hotel management
+                2)Reservation management
+                0)Exit""";
+        int choice;
+        while(true){
+            System.out.println(menu);
+            choice = input.nextInt();
+            input.nextLine();
+            switch (choice) {
+                case 1:
+                    System.out.println("hotel");
+                    break;
+                case 2:
+                    System.out.println("reservation");
+                    break;
+                case 0:
+                    System.exit(0);
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
+            }
+        }
+
     }
 }
