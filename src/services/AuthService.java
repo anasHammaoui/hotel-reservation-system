@@ -9,6 +9,8 @@ public class AuthService {
         for (User user: users){
             if (email.isEmpty() || email.isBlank()){
                 return "Please enter a valid email";
+            }else if (password.isEmpty() || password.length() < 6){
+                return "Password must be more than 6 characters";
             } else if (user.getEmail().equalsIgnoreCase(email)){
                 return "Account with this email Already exists";
             }     
