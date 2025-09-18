@@ -1,6 +1,8 @@
 package src.services;
 
 import java.util.HashMap;
+import java.util.UUID;
+
 import src.models.Hotel;
 
 public class HotelService {
@@ -26,5 +28,18 @@ public class HotelService {
         }
         return availableHotels;
     }
-    
+
+    public boolean updateHotel(HashMap<String, Hotel> hotels, UUID id,String name, int availableRooms, double rating){
+        for (Hotel hotel: hotels.values()){
+            if (hotel.getId() == id){
+                hotel.setName(name);
+                hotel.setAvailableRooms(availableRooms);
+                hotel.setRating(rating);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }
