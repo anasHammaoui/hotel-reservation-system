@@ -5,6 +5,12 @@ import java.util.Scanner;
 import src.repositories.AuthRepository;
 
 public class Menu {
+
+    private AuthRepository auth;
+    public Menu(AuthRepository auth){
+        this.auth = auth;
+    }
+
     public String guestMenu(){
         String menu = """
                 1)Register
@@ -12,7 +18,7 @@ public class Menu {
                 0)Exit""";
         return menu;
     }
-    public void registerMenu(Scanner input, AuthRepository auth){
+    public void registerMenu(Scanner input){
         System.out.println("*****Register Menu******");
         System.out.print("Enter your name: ");
         String fullName = input.nextLine();
@@ -22,12 +28,12 @@ public class Menu {
         String password = input.nextLine();
         String message = auth.register(fullName,email,password);
         if (message.equals("done")){
-            this.authenticatedMenu(input, auth);
+            this.authenticatedMenu(input);
         } else {
             System.err.println(message);
         }
     }
-    public void loginMenu(Scanner input, AuthRepository auth){
+    public void loginMenu(Scanner input){
         System.out.println("*****Login Menu******");
         System.out.print("Enter your Email:");
         String email = input.nextLine();
@@ -35,13 +41,13 @@ public class Menu {
         String password = input.nextLine();
         String message = auth.login(email,password);
         if (message.equals("done")){
-            this.authenticatedMenu(input, auth);
+            this.authenticatedMenu(input);
         } else  {
            System.err.println(message);
         }
     }
 
-    public void authenticatedMenu(Scanner input, AuthRepository auth){
+    public void authenticatedMenu(Scanner input){
         System.out.println("*****Welcome "+ auth.getAuthUser(auth.isLogedIn(), auth.getId()).getFullName() +"******");
         String menu = """
                 1)Hotel management
@@ -67,6 +73,6 @@ public class Menu {
                     break;
             }
         }
-
     }
+
 }

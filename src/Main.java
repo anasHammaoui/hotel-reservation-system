@@ -10,7 +10,7 @@ public class Main {
  
         Scanner input = new Scanner(System.in);
         AuthRepository auth = new AuthRepository();
-        Menu menu = new Menu();
+        Menu menu = new Menu(auth);
         int choice;
         while(true){
             System.out.println("*****Main Menu******");
@@ -18,8 +18,8 @@ public class Main {
             choice = input.nextInt();
             input.nextLine();
             switch(choice){
-                case 1 -> menu.registerMenu(input, auth);
-                case 2 -> menu.loginMenu(input, auth);
+                case 1 -> menu.registerMenu(input);
+                case 2 -> menu.loginMenu(input);
                 case 0 -> System.exit(0);
                 default ->  System.out.println("Invalid choice. Please try again.");
             }
