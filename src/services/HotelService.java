@@ -41,5 +41,7 @@ public class HotelService {
         return false;
     }
 
-
+    public boolean deleteHotel(HashMap<String, Hotel> hotels,String name){
+       return hotels.remove(name) != null;
+    }
 }
