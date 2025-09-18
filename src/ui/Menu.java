@@ -1,14 +1,20 @@
 package src.ui;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
+import src.models.Hotel;
 import src.repositories.AuthRepository;
+import src.repositories.HotelRepository;
 
 public class Menu {
 
     private AuthRepository auth;
-    public Menu(AuthRepository auth){
+    private HotelRepository hotels;
+
+    public Menu(AuthRepository auth, HotelRepository hotels){
         this.auth = auth;
+        this.hotels = hotels;
     }
 
     public String guestMenu(){
@@ -60,7 +66,7 @@ public class Menu {
             input.nextLine();
             switch (choice) {
                 case 1:
-                    System.out.println("hotel");
+                    hotelManagementMenu(input);
                     break;
                 case 2:
                     System.out.println("reservation");
@@ -75,4 +81,72 @@ public class Menu {
         }
     }
 
+    public void hotelManagementMenu(Scanner input){
+        System.out.println("*****Hotel Management******");
+        String menu = """
+                1)Create Hotel
+                2)List hotels
+                2)Update hotel
+                2)Delete hotel
+                0)Exit""";
+        String listHotelsMenu = """
+                1)List all hotels
+                2)List available hotels
+                0)Exit
+                """;
+        int choice;
+        while(true){
+            System.out.println(menu);
+            choice = input.nextInt();
+            input.nextLine();
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter hotel name: ");
+                    String name = input.nextLine();
+                    System.out.print("Enter available rooms: ");
+                    int availableRooms = input.nextInt();
+                    System.out.print("Enter hotel rating: ");
+                    double rating = input.nextDouble();
+                    input.nextLine();
+                    hotels.createHotel(name, availableRooms, rating);
+                    break;
+                case 2:
+                    while(true){
+                        System.out.print(listHotelsMenu);
+                    choice = input.nextInt();
+                    input.nextLine();
+                    HashMap<String, Hotel> listhHotels = new HashMap<>();
+                    while (true) {
+                        if (choice == 1){
+                        listhHotels = hotels.listHotels(false);
+                    } else if (choice == 2){
+                        listhHotels = hotels.listHotels(true);
+                    } else {
+                        return;
+                    }
+                    if (listhHotels.size() > 0){
+                        for (Hotel hotel : listhHotels.values()){
+                        System.out.println("******Hotel "+ hotel.getName() + "******");
+                        System.out.println("Hotel Name: "+hotel.getName());
+                        System.out.println("Hotel Rating: "+hotel.getRating());
+                        System.out.println("Available rooms: "+hotel.getAvailableRooms());
+                        }
+                    } else {
+                        System.out.println("No available hotels yet:)");
+                    }
+                    System.out.print("Click 0 to go back: ");
+                    int exit = input.nextInt();
+                    if (exit == 0){
+                        return;
+                    }
+                    }
+                    }
+                case 0:
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
+            }
+        }
+    }
 }

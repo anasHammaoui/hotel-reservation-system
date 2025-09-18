@@ -3,6 +3,7 @@ package src;
 import java.util.Scanner;
 
 import src.repositories.AuthRepository;
+import src.repositories.HotelRepository;
 import src.ui.Menu;
 
 public class Main {
@@ -10,7 +11,8 @@ public class Main {
  
         Scanner input = new Scanner(System.in);
         AuthRepository auth = new AuthRepository();
-        Menu menu = new Menu(auth);
+        HotelRepository hotels = new HotelRepository(auth);
+        Menu menu = new Menu(auth, hotels);
         int choice;
         while(true){
             System.out.println("*****Main Menu******");
