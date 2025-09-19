@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import src.repositories.AuthRepository;
 import src.repositories.HotelRepository;
+import src.repositories.ReservationRepository;
+import src.services.ReservationService;
 import src.ui.Menu;
 
 public class Main {
@@ -12,7 +14,9 @@ public class Main {
         Scanner input = new Scanner(System.in);
         AuthRepository auth = new AuthRepository();
         HotelRepository hotels = new HotelRepository(auth);
-        Menu menu = new Menu(auth, hotels);
+        ReservationService resevationService = new ReservationService();
+        ReservationRepository reservations = new ReservationRepository(hotels, resevationService);
+        Menu menu = new Menu(auth, hotels, reservations);
         int choice;
         while(true){
             System.out.println("*****Main Menu******");

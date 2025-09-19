@@ -1,5 +1,6 @@
 package src.repositories;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -9,14 +10,14 @@ import src.interfaces.ReservationServiceInterface;
 import src.models.Reservation;
 
 public class ReservationRepository implements ReservationInterface{
-    private List<Reservation> reservations;
+    private List<Reservation> reservations =  new ArrayList<>();
     private HotelInterface hotels;
     private ReservationServiceInterface reservationService;
     public ReservationRepository( HotelInterface hotels, ReservationServiceInterface reservationService){
         this.hotels = hotels;
         this.reservationService = reservationService;
     }
-    public void bookARoom(UUID userId, String hotelName, List<Reservation> reservation, int nights){
+    public void bookARoom(UUID userId, String hotelName, int nights){
     reservationService.bookARoom(userId, hotelName, hotels.getHotels(), reservations, nights);
     }
     public void cancelReservation(UUID userId, String hotelName, List<Reservation> reservation){
