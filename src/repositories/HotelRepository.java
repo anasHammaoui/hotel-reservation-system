@@ -45,4 +45,9 @@ public class HotelRepository implements HotelInterface {
          }
         return false;
     }
+    @Override
+     public HashMap<String, Hotel> getHotels(){
+        return this.hotels;
+     }
+    
 }

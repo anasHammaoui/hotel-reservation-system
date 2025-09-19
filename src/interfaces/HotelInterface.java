@@ -10,5 +10,5 @@ public interface HotelInterface {
     HashMap<String, Hotel> listHotels(boolean filter);
     boolean updateHotel(UUID id,String name, int availableRooms, double rating);
     boolean deleteHotel(UUID id);
-
+     HashMap<String, Hotel> getHotels();
 }

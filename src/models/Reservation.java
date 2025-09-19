@@ -9,9 +9,9 @@ public class Reservation {
     private UUID clientId;
     private int nights;
     
-    public Reservation(Timestamp instant, UUID hotelId, int nights ){
+    public Reservation( UUID hotelId, int nights ){
         this.id = UUID.randomUUID();
-        this.instant = instant;
+        this.instant = new Timestamp(System.currentTimeMillis());
         this.hotelId = hotelId;
         this.nights = nights;
     }

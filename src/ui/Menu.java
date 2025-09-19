@@ -181,4 +181,103 @@ public class Menu {
             }
         }
     }
+    public void reservationMangement(Scanner input){
+                System.out.println("*****Reservation Management******");
+        String menu = """
+                1)Book a room
+                2)List hotels
+                3)Update hotel
+                4)Delete hotel
+                0)Exit""";
+        String listHotelsMenu = """
+                1)List all hotels
+                2)List available hotels
+                0)Exit
+                """;
+        int choice;
+        while(true){
+            System.out.println(menu);
+            choice = input.nextInt();
+            input.nextLine();
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter hotel name: ");
+                    String name = input.nextLine();
+                    System.out.print("Enter available rooms: ");
+                    int availableRooms = input.nextInt();
+                    System.out.print("Enter hotel rating: ");
+                    double rating = input.nextDouble();
+                    input.nextLine();
+                    if (hotels.createHotel(name, availableRooms, rating)){
+                        System.out.println("Hotel created with success");
+                    } else {
+                        System.out.println("Failed to create hotel");
+                    }
+                    break;
+                case 2:
+                    while(true){
+                        System.out.print(listHotelsMenu);
+                    choice = input.nextInt();
+                    input.nextLine();
+                    HashMap<String, Hotel> listhHotels = new HashMap<>();
+                        if (choice == 1){
+                        listhHotels = hotels.listHotels(false);
+                    } else if (choice == 2){
+                        listhHotels = hotels.listHotels(true);
+                    } else {
+                        break;
+                    }
+                    if (listhHotels.size() > 0){
+                        for (Hotel hotel : listhHotels.values()){
+                        System.out.println("******Hotel "+ hotel.getName() + "******");
+                        System.out.println("Hotel Id: "+hotel.getId());
+                        System.out.println("Hotel Name: "+hotel.getName());
+                        System.out.println("Hotel Rating: "+hotel.getRating());
+                        System.out.println("Available rooms: "+hotel.getAvailableRooms());
+                        }
+                    } else {
+                        System.out.println("No available hotels yet:)");
+                        continue;
+                    }
+                    System.out.print("Click 0 to go back: ");
+                    int exit = input.nextInt();
+                    input.nextLine();
+                    if (exit == 0){
+                        break;
+                    }
+                    }
+                    break;
+                case 3:
+                    System.out.print("Enter hotel Id: ");
+                    UUID id = UUID.fromString(input.nextLine());
+                    System.out.print("Enter new name: ");
+                    String newName = input.nextLine();
+                    System.out.print("Enter available rooms: ");
+                    int newAvRooms = input.nextInt();
+                    System.out.print("Enter new rating: ");
+                    double newRating = input.nextDouble();
+                    input.nextLine();
+                    if (hotels.updateHotel(id, newName, newAvRooms, newRating)){
+                        System.out.println("Hotel updated with success");
+                    } else {
+                        System.out.println("Failed to update, check if hotel exists");
+                    }
+                break;
+                case 4:
+                    System.out.print("Enter hotel Id: ");
+                    UUID hotelId = UUID.fromString(input.nextLine());
+                    if (hotels.deleteHotel(hotelId)){
+                        System.out.println("Hotel deleted with success");
+                    } else {
+                        System.out.println("Failed to delete, check if hotel exists");
+                    }
+                break;
+                case 0:
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
+            }
+        }
+    }
 }
