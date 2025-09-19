@@ -31,17 +31,23 @@ public class HotelService {
 
     public boolean updateHotel(HashMap<String, Hotel> hotels, UUID id,String name, int availableRooms, double rating){
         for (Hotel hotel: hotels.values()){
-            if (hotel.getId() == id){
+            if (hotel.getId().equals(id)){
+                String oldName = hotel.getName();
                 hotel.setName(name);
                 hotel.setAvailableRooms(availableRooms);
                 hotel.setRating(rating);
+                if (!oldName.equals(name)) {
+                    hotels.remove(oldName);
+                    hotels.put(name, hotel);
+                }
                 return true;
             }
         }
         return false;
     }
 
-    public boolean deleteHotel(HashMap<String, Hotel> hotels,String name){
-       return hotels.remove(name) != null;
+
+    public boolean deleteHotel(HashMap<String, Hotel> hotels, UUID id) {
+        return hotels.values().removeIf(hotel -> hotel.getId().equals(id));
     }
 }

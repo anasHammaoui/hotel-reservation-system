@@ -39,9 +39,9 @@ public class HotelRepository implements HotelInterface {
     }
 
     @Override
-    public boolean deleteHotel(String name){
+    public boolean deleteHotel(UUID id){
         if (user.isLogedIn()){
-         return hotelService.deleteHotel(hotels,name);
+         return hotelService.deleteHotel(hotels,id);
          }
         return false;
     }

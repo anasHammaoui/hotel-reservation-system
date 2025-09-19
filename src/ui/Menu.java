@@ -2,6 +2,7 @@ package src.ui;
 
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.UUID;
 
 import src.models.Hotel;
 import src.repositories.AuthRepository;
@@ -108,7 +109,11 @@ public class Menu {
                     System.out.print("Enter hotel rating: ");
                     double rating = input.nextDouble();
                     input.nextLine();
-                    hotels.createHotel(name, availableRooms, rating);
+                    if (hotels.createHotel(name, availableRooms, rating)){
+                        System.out.println("Hotel created with success");
+                    } else {
+                        System.out.println("Failed to create hotel");
+                    }
                     break;
                 case 2:
                     while(true){
@@ -126,6 +131,7 @@ public class Menu {
                     if (listhHotels.size() > 0){
                         for (Hotel hotel : listhHotels.values()){
                         System.out.println("******Hotel "+ hotel.getName() + "******");
+                        System.out.println("Hotel Id: "+hotel.getId());
                         System.out.println("Hotel Name: "+hotel.getName());
                         System.out.println("Hotel Rating: "+hotel.getRating());
                         System.out.println("Available rooms: "+hotel.getAvailableRooms());
@@ -142,6 +148,31 @@ public class Menu {
                     }
                     }
                     break;
+                case 3:
+                    System.out.print("Enter hotel Id: ");
+                    UUID id = UUID.fromString(input.nextLine());
+                    System.out.print("Enter new name: ");
+                    String newName = input.nextLine();
+                    System.out.print("Enter available rooms: ");
+                    int newAvRooms = input.nextInt();
+                    System.out.print("Enter new rating: ");
+                    double newRating = input.nextDouble();
+                    input.nextLine();
+                    if (hotels.updateHotel(id, newName, newAvRooms, newRating)){
+                        System.out.println("Hotel updated with success");
+                    } else {
+                        System.out.println("Failed to update, check if hotel exists");
+                    }
+                break;
+                case 4:
+                    System.out.print("Enter hotel Id: ");
+                    UUID hotelId = UUID.fromString(input.nextLine());
+                    if (hotels.deleteHotel(hotelId)){
+                        System.out.println("Hotel deleted with success");
+                    } else {
+                        System.out.println("Failed to delete, check if hotel exists");
+                    }
+                break;
                 case 0:
                     return;
                 default:
