@@ -86,8 +86,8 @@ public class Menu {
         String menu = """
                 1)Create Hotel
                 2)List hotels
-                2)Update hotel
-                2)Delete hotel
+                3)Update hotel
+                4)Delete hotel
                 0)Exit""";
         String listHotelsMenu = """
                 1)List all hotels
@@ -116,13 +116,12 @@ public class Menu {
                     choice = input.nextInt();
                     input.nextLine();
                     HashMap<String, Hotel> listhHotels = new HashMap<>();
-                    while (true) {
                         if (choice == 1){
                         listhHotels = hotels.listHotels(false);
                     } else if (choice == 2){
                         listhHotels = hotels.listHotels(true);
                     } else {
-                        return;
+                        break;
                     }
                     if (listhHotels.size() > 0){
                         for (Hotel hotel : listhHotels.values()){
@@ -133,14 +132,16 @@ public class Menu {
                         }
                     } else {
                         System.out.println("No available hotels yet:)");
+                        continue;
                     }
                     System.out.print("Click 0 to go back: ");
                     int exit = input.nextInt();
+                    input.nextLine();
                     if (exit == 0){
-                        return;
+                        break;
                     }
                     }
-                    }
+                    break;
                 case 0:
                     return;
                 default:
