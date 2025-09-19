@@ -90,54 +90,6 @@ Develop a clean, testable, and understandable foundation for a hotel reservation
 - clientId: UUID
 - nights: int
 ```
-
-## 🏛️ Architecture
-
-### Layers
-
-#### **Presentation Layer**
-- **Main (Console UI)**: Menu management, user input, display output, application flow control
-
-#### **Service Layer**
-- **AuthService**: User registration, authentication, profile management, password operations
-- **HotelService**: Hotel CRUD operations, availability checking, listing functionality
-- **ReservationService**: Booking management, cancellation handling, history consultation
-
-#### **Data Layer**
-- **Repository Interfaces**: `ClientRepository`, `HotelRepository`, `ReservationRepository`
-- **In-Memory Implementations**: `InMemoryClientRepository`, `InMemoryHotelRepository`, `InMemoryReservationRepository`
-
-#### **Utility Layer**
-- **Console Utils**: Input handling, data validation utilities
-
-## 🚀 User Journey
-
-### Unauthenticated Menu
-```
-┌─ Welcome to Hotel Reservation System ─┐
-│ 1. Register                            │
-│ 2. Login                               │
-│ 3. Exit                                │
-└────────────────────────────────────────┘
-```
-
-### Authenticated Menu
-```
-┌─ Logged in as: user@example.com ─┐
-│ 1. Create Hotel (Admin)          │
-│ 2. List Hotels                   │
-│ 3. Reserve Room                  │
-│ 4. Cancel Reservation            │
-│ 5. Reservation History           │
-│ 6. Update Profile                │
-│ 7. Change Password               │
-│ 8. Logout                        │
-│ 9. Exit                          │
-└──────────────────────────────────┘
-```
-
-## ✅ Expected Results
-
 ### Functional Requirements
 - ✅ Working registration and login system with email uniqueness validation
 - ✅ Complete hotel CRUD operations following business rules
@@ -170,12 +122,12 @@ cd hotel-reservation-system
 
 2. Compile the project
 ```bash
-javac -d bin src/**/*.java
+javac src/**/*.java
 ```
 
 3. Run the application
 ```bash
-java -cp bin Main
+java  src.Main
 ```
 
 ### Usage
